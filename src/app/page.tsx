@@ -7,6 +7,7 @@ import ActivityTicker from '@/components/LiveFeed/ActivityTicker';
 import Hero from '@/components/Hero/Hero';
 import CalendarHeatmap from '@/components/Calendar/CalendarHeatmap';
 import PredictionModal from '@/components/Prediction/PredictionModal';
+import MiniAppReady from '@/components/MiniAppReady';
 import { useAccount } from 'wagmi';
 import { useMintedDate } from '@/hooks/useContractData';
 
@@ -27,6 +28,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[#0A0A0A] text-white selection:bg-[#0052FF]/30">
+      <MiniAppReady />
       <NetworkBanner />
       {hasMinted && (
           <div className="fixed top-0 left-0 right-0 bg-[#0052FF] text-white text-xs font-bold text-center py-1 z-[60]">

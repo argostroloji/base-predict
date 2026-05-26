@@ -15,14 +15,16 @@ export function GET() {
       splashBackgroundColor: '#0052FF',
       subtitle: 'When Base Token?',
       description:
-        'Mint your prediction for the Base token TGE date. ERC-1155 on Base. Max 10 per date, 1 per wallet.',
-      primaryCategory: 'social',
-      tags: ['base', 'prediction', 'nft', 'erc1155'],
+        'Mint your prediction for the Base token TGE date. ERC-1155 on Base. Max 10 per date.',
+      primaryCategory: 'finance',
+      tags: ['base', 'prediction', 'nft', 'tge'],
       heroImageUrl: `${SITE_URL}/og-image.png`,
       ogTitle: 'When Base Token?',
       ogDescription:
         'Mint your prediction for the Base token TGE date.',
       ogImageUrl: `${SITE_URL}/og-image.png`,
+      requiredChains: ['eip155:8453'],
+      requiredCapabilities: ['actions.signIn', 'actions.openUrl'],
     },
     // Account association — signed for base-predict-delta.vercel.app
     accountAssociation: {
