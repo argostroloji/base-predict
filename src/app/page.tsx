@@ -7,6 +7,7 @@ import ActivityTicker from '@/components/LiveFeed/ActivityTicker';
 import Hero from '@/components/Hero/Hero';
 import CalendarHeatmap from '@/components/Calendar/CalendarHeatmap';
 import PredictionModal from '@/components/Prediction/PredictionModal';
+import MyPrediction from '@/components/Prediction/MyPrediction';
 import MiniAppReady from '@/components/MiniAppReady';
 import { useAccount } from 'wagmi';
 import { useMintedDate } from '@/hooks/useContractData';
@@ -30,16 +31,13 @@ export default function Home() {
     <main className="min-h-screen bg-[#0A0A0A] text-white selection:bg-[#0052FF]/30">
       <MiniAppReady />
       <NetworkBanner />
-      {hasMinted && (
-          <div className="fixed top-0 left-0 right-0 bg-[#0052FF] text-white text-xs font-bold text-center py-1 z-[60]">
-              You have already minted a prediction ticket for this wallet.
-          </div>
-      )}
-      
-      <div className={hasMinted ? 'mt-6' : ''}>
+
+      <div>
         <Navbar />
         <ActivityTicker />
-        
+
+        {hasMinted && <MyPrediction />}
+
         <div className="flex flex-col xl:flex-row relative z-10 max-w-[1800px] mx-auto px-4 xl:px-8 items-center xl:items-start min-h-[90vh] pt-8 xl:pt-20 gap-12 xl:gap-8">
             <div className="w-full xl:w-[400px] 2xl:w-[500px] flex-shrink-0 flex flex-col justify-center xl:sticky xl:top-24">
             <Hero />

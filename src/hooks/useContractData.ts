@@ -27,6 +27,24 @@ export function useMintedDate(address?: `0x${string}`) {
 }
 
 /**
+ * Read the X handle that a given address registered for a tokenId.
+ */
+export function useMinterHandle(tokenId: bigint | undefined, user: `0x${string}` | undefined) {
+  const { data, isLoading } = useReadContract({
+    address: CONTRACT_ADDRESS,
+    abi: BASE_LAUNCH_NFT_ABI,
+    functionName: 'tokenMinterInfo',
+    args: tokenId && user ? [tokenId, user] : undefined,
+    query: { enabled: !!tokenId && !!user && tokenId > 0n },
+  });
+
+  return {
+    handle: (data as string | undefined) ?? '',
+    isLoading,
+  };
+}
+
+/**
  * Get the total number of mints for a specific date/tokenId.
  */
 export function useDateMintCount(tokenId: bigint) {
