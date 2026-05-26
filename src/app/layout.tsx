@@ -1,0 +1,57 @@
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import { Providers } from '@/providers/Web3Provider';
+
+const inter = Inter({ subsets: ['latin'] });
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://basepredict.xyz';
+const OG_IMAGE = `${SITE_URL}/og-image.png`;
+
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: 'Base Predict — When Base Token?',
+  description: 'Mint your prediction for the Base token TGE date. ERC-1155 on Base. 10 NFTs per date. Winners earn 70% of token fees.',
+  openGraph: {
+    title: 'When Base Token? — Base Predict',
+    description: 'Mint your prediction for the Base token TGE date. ERC-1155 on Base.',
+    url: SITE_URL,
+    siteName: 'Base Predict',
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Base Predict' }],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'When Base Token? — Base Predict',
+    description: 'Mint your prediction for the Base token TGE date.',
+    images: [OG_IMAGE],
+  },
+  other: {
+    // Farcaster Frame v2 / Mini-app metadata
+    'fc:frame': JSON.stringify({
+      version: 'next',
+      imageUrl: OG_IMAGE,
+      button: {
+        title: 'Predict Base Launch',
+        action: {
+          type: 'launch_frame',
+          name: 'Base Predict',
+          url: SITE_URL,
+          splashImageUrl: `${SITE_URL}/icon.png`,
+          splashBackgroundColor: '#0052FF',
+        },
+      },
+    }),
+  },
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" className="dark scroll-smooth">
+      <body className={`${inter.className} bg-[#0A0A0A] text-white antialiased`}>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  );
+}

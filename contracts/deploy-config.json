@@ -1,0 +1,40 @@
+{
+  "contractName": "BaseLaunchNFTMarket",
+  "networks": {
+    "base-mainnet": {
+      "chainId": 8453,
+      "rpcUrl": "https://mainnet.base.org",
+      "blockExplorer": "https://basescan.org",
+      "constructorArgs": {
+        "prizePoolWallet": "0x2a0a7a70844877362e5Ad1E33d5045A2FDD6678f"
+      }
+    },
+    "base-sepolia": {
+      "chainId": 84532,
+      "rpcUrl": "https://sepolia.base.org",
+      "blockExplorer": "https://sepolia.basescan.org",
+      "constructorArgs": {
+        "prizePoolWallet": "0x2a0a7a70844877362e5Ad1E33d5045A2FDD6678f"
+      }
+    },
+    "eth-sepolia": {
+      "chainId": 11155111,
+      "rpcUrl": "https://rpc.sepolia.org",
+      "blockExplorer": "https://sepolia.etherscan.io",
+      "constructorArgs": {
+        "prizePoolWallet": "0x2a0a7a70844877362e5Ad1E33d5045A2FDD6678f"
+      }
+    }
+  },
+  "compiler": {
+    "version": "0.8.20",
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    }
+  },
+  "royalty": {
+    "basisPoints": 500,
+    "description": "5% royalty on secondary sales routed to prizePoolWallet"
+  }
+}

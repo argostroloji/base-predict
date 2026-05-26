@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0052FF;
+  --color-background: #0A0A0A;
+  --color-foreground: #ffffff;
+  --animate-pulse-amber: pulse-amber 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-card-reveal: card-reveal 1.2s ease-out forwards;
+  --animate-confetti-burst: confetti-burst 0.8s ease-out forwards;
+  --animate-glow-breathe: glow-breathe 3s ease-in-out infinite;
+  --animate-float-up: float-up 0.6s ease-out forwards;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    overflow-x: hidden;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   URGENCY PULSE — Amber/Orange glow for 6-9/10 cells
+   ═══════════════════════════════════════════════════ */
+@keyframes pulse-amber {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.3), 0 0 0 0 rgba(245, 158, 11, 0.2);
+    border-color: rgba(245, 158, 11, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(249, 115, 22, 0.6), 0 0 30px rgba(249, 115, 22, 0.15);
+    border-color: rgba(249, 115, 22, 0.9);
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   3D CARD REVEAL — Ticket flip animation
+   ═══════════════════════════════════════════════════ */
+@keyframes card-reveal {
+  0% {
+    transform: perspective(800px) rotateY(90deg) scale(0.8);
+    opacity: 0;
+    filter: blur(8px);
+  }
+  40% {
+    transform: perspective(800px) rotateY(-15deg) scale(1.05);
+    opacity: 1;
+    filter: blur(0px);
+  }
+  70% {
+    transform: perspective(800px) rotateY(8deg) scale(1.02);
+  }
+  100% {
+    transform: perspective(800px) rotateY(0deg) scale(1);
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   CONFETTI BURST — Particle celebration
+   ═══════════════════════════════════════════════════ */
+@keyframes confetti-burst {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   GLOW BREATHE — Subtle pulsing glow for active elements
+   ═══════════════════════════════════════════════════ */
+@keyframes glow-breathe {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(0, 82, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(0, 82, 255, 0.6), 0 0 60px rgba(0, 82, 255, 0.15);
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   FLOAT UP — Elements rising into view
+   ═══════════════════════════════════════════════════ */
+@keyframes float-up {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   SOLD OUT DIAGONAL LINES
+   ═══════════════════════════════════════════════════ */
+.sold-out-pattern {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 4px,
+    rgba(255, 255, 255, 0.03) 4px,
+    rgba(255, 255, 255, 0.03) 6px
+  );
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1a1a2e;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0052ff;
+}
