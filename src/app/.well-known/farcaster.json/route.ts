@@ -24,12 +24,11 @@ export function GET() {
         'Mint your prediction for the Base token TGE date.',
       ogImageUrl: `${SITE_URL}/og-image.png`,
     },
-    // Account association — fill these in once your domain + Farcaster account are linked.
-    // Generate at https://farcaster.xyz/~/developers/mini-apps/manifest
+    // Account association — signed for base-predict-delta.vercel.app
     accountAssociation: {
-      header: '',
-      payload: '',
-      signature: '',
+      header: 'eyJmaWQiOjQ1NzQxNiwidHlwZSI6ImF1dGgiLCJrZXkiOiIweEIzZTM3YTZGOENDNzIyRjlCQzk2MDA0NUUyNTNkODkyODVEMjkzMDYifQ',
+      payload: 'eyJkb21haW4iOiJiYXNlLXByZWRpY3QtZGVsdGEudmVyY2VsLmFwcCJ9',
+      signature: '3THBxcyXV38JWAgMGa072Ik2mr5GJ1HUZSaGJHYnvhR8aEtkadlf0kP1ER943N37vKrzP/RAjfvnDbyRzitFnhs=',
     },
   });
 }
