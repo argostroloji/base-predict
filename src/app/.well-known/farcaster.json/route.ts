@@ -26,15 +26,15 @@ export function GET() {
       requiredChains: ['eip155:8453'],
       requiredCapabilities: ['actions.signIn', 'actions.openUrl'],
     },
-    // ⚠️ Account association — must be re-signed for the basepre.xyz domain.
-    //    The previous signature was valid only for base-predict-delta.vercel.app.
-    //    Re-generate at: https://farcaster.xyz/~/developers/mini-apps/manifest
-    //    Until re-signed, the manifest is still a valid mini-app but cannot
-    //    claim domain ownership for notifications / verified embeds.
-    // accountAssociation: {
-    //   header: '...',
-    //   payload: '...',
-    //   signature: '...',
-    // },
+    // Account association — signed for basepre.xyz
+    // Re-generate at https://farcaster.xyz/~/developers/mini-apps/manifest
+    // if the domain ever changes again.
+    accountAssociation: {
+      header:
+        'eyJmaWQiOjQ1NzQxNiwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweGM5YzI5NjY0NWU3ODQ4MDhBOTNiZDVkNzlBMDRkQjgwOEM0NTlmRmEifQ',
+      payload: 'eyJkb21haW4iOiJiYXNlcHJlLnh5eiJ9',
+      signature:
+        'oVcyHAAfZo7eoVcb1NcbuppQG44atg+797RrhzepO10ItmEn+UbckRxysmDXKZTV8fcQK6axL1CGyy7BVQPkSBs=',
+    },
   });
 }
