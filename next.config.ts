@@ -30,10 +30,27 @@ const nextConfig: NextConfig = {
 
   // Security headers applied to every route
   async headers() {
+    // Allowed frame ancestors — keeps clickjacking protection while letting
+    // Farcaster / Warpcast / Base App host the site as a mini-app iframe.
+    // `'self'` covers our own domain; the rest are the mini-app clients
+    // documented at https://miniapps.farcaster.xyz/docs
+    const frameAncestors = [
+      "'self'",
+      "https://farcaster.xyz",
+      "https://*.farcaster.xyz",
+      "https://warpcast.com",
+      "https://*.warpcast.com",
+      "https://*.base.org",
+      "https://*.base.app",
+    ].join(" ");
+
     const securityHeaders = [
-      // Prevent clickjacking (allow framing only by same origin so Farcaster
-      // mini-app embeds via /.well-known still work via the Frame meta path)
-      { key: "X-Frame-Options", value: "SAMEORIGIN" },
+      // Modern replacement for X-Frame-Options. X-Frame-Options can only
+      // express 'self' or 'deny' and would block the Farcaster iframe.
+      {
+        key: "Content-Security-Policy",
+        value: `frame-ancestors ${frameAncestors};`,
+      },
 
       // Block MIME-type sniffing
       { key: "X-Content-Type-Options", value: "nosniff" },
