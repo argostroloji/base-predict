@@ -20,7 +20,10 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "raw.seadn.io" },
       { protocol: "https", hostname: "ipfs.io" },
       { protocol: "https", hostname: "*.ipfs.dweb.link" },
+      { protocol: "https", hostname: "basepre.xyz" },
+      // Vercel preview deployments — keep so PR previews still optimize images
       { protocol: "https", hostname: "base-predict-delta.vercel.app" },
+      { protocol: "https", hostname: "*.vercel.app" },
     ],
     minimumCacheTTL: 60 * 60 * 24, // 24h cache for optimized images
   },

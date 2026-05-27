@@ -5,7 +5,7 @@ import { Providers } from '@/providers/Web3Provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://basepredict.xyz';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://basepre.xyz';
 const OG_IMAGE = `${SITE_URL}/og-image.png`;
 
 export const metadata: Metadata = {

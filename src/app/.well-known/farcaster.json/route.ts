@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://basepredict.xyz';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://basepre.xyz';
 
 export function GET() {
   return NextResponse.json({
@@ -26,11 +26,15 @@ export function GET() {
       requiredChains: ['eip155:8453'],
       requiredCapabilities: ['actions.signIn', 'actions.openUrl'],
     },
-    // Account association — signed for base-predict-delta.vercel.app
-    accountAssociation: {
-      header: 'eyJmaWQiOjQ1NzQxNiwidHlwZSI6ImF1dGgiLCJrZXkiOiIweEIzZTM3YTZGOENDNzIyRjlCQzk2MDA0NUUyNTNkODkyODVEMjkzMDYifQ',
-      payload: 'eyJkb21haW4iOiJiYXNlLXByZWRpY3QtZGVsdGEudmVyY2VsLmFwcCJ9',
-      signature: '3THBxcyXV38JWAgMGa072Ik2mr5GJ1HUZSaGJHYnvhR8aEtkadlf0kP1ER943N37vKrzP/RAjfvnDbyRzitFnhs=',
-    },
+    // ⚠️ Account association — must be re-signed for the basepre.xyz domain.
+    //    The previous signature was valid only for base-predict-delta.vercel.app.
+    //    Re-generate at: https://farcaster.xyz/~/developers/mini-apps/manifest
+    //    Until re-signed, the manifest is still a valid mini-app but cannot
+    //    claim domain ownership for notifications / verified embeds.
+    // accountAssociation: {
+    //   header: '...',
+    //   payload: '...',
+    //   signature: '...',
+    // },
   });
 }
