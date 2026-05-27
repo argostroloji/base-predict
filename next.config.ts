@@ -82,6 +82,27 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+
+  // 308 permanent redirect from the legacy Vercel domain to basepre.xyz.
+  // The `has: host` matcher means this only fires when the incoming request's
+  // Host header is the old domain — production traffic on basepre.xyz is
+  // untouched, and PR/branch preview deployments (*-git-*.vercel.app, etc.)
+  // are not affected because they have different hostnames.
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "base-predict-delta.vercel.app",
+          },
+        ],
+        destination: "https://basepre.xyz/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
