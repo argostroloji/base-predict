@@ -10,21 +10,21 @@ const OG_IMAGE = `${SITE_URL}/og-image.png`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'Base Predict — When Base Token?',
-  description: 'Mint your prediction for the Base token TGE date. ERC-1155 on Base. 10 NFTs per date. Winners earn 70% of token fees.',
+  title: 'Base Predict — Free Mint, When Base Token?',
+  description: 'Free mint — predict the Base token TGE date. ERC-1155 on Base. Max 10 NFTs per date. Pay only gas. Winners earn 70% in $BASEPRE.',
   openGraph: {
-    title: 'When Base Token? — Base Predict',
-    description: 'Mint your prediction for the Base token TGE date. ERC-1155 on Base.',
+    title: 'When Base Token? — Free Mint on Base',
+    description: 'Free mint your prediction for the Base token TGE date. Pay only gas (~$0.01). ERC-1155 on Base.',
     url: SITE_URL,
     siteName: 'Base Predict',
-    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Base Predict' }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Base Predict — Free Mint' }],
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'When Base Token? — Base Predict',
-    description: 'Mint your prediction for the Base token TGE date.',
+    title: 'When Base Token? — Free Mint',
+    description: 'Free mint your prediction for the Base token TGE date. Pay only gas.',
     images: [OG_IMAGE],
   },
   other: {
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
       version: 'next',
       imageUrl: OG_IMAGE,
       button: {
-        title: 'Predict Base Launch',
+        title: 'Free Mint — Predict Base Launch',
         action: {
           type: 'launch_frame',
           name: 'Base Predict',

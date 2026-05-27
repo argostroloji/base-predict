@@ -20,7 +20,7 @@ const SITE_URL =
 export default function ShareCard({ date, xHandle, txHash, tokenId }: ShareCardProps) {
   const [copied, setCopied] = useState(false);
 
-  const tweetText = `I just minted my Base Launch Ticket NFT for ${date}! 🎟️🔵\n\nLock yours in before the date sells out. $BASEPRE`;
+  const tweetText = `I just free-minted my Base Launch Ticket NFT for ${date}! 🎟️🔵\n\nFree mint, pay only gas. Lock yours in before the date sells out. $BASEPRE`;
   const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(SITE_URL)}`;
 
   // Warpcast uses a different intent format
@@ -67,8 +67,8 @@ export default function ShareCard({ date, xHandle, txHash, tokenId }: ShareCardP
       </div>
 
       <p className="text-left text-gray-300 text-sm mb-4 leading-relaxed">
-        I just minted my <strong className="text-[#0052FF]">Base Launch Ticket NFT</strong> for <strong className="text-white bg-[#0052FF]/20 px-1 rounded border border-[#0052FF]/30">{date}</strong>! 🎟️🔵<br/><br/>
-        Lock yours in before the date sells out. <strong className="text-[#3B82FF]">$BASEPRE</strong>
+        I just <strong className="text-[#00FF88]">free-minted</strong> my <strong className="text-[#0052FF]">Base Launch Ticket NFT</strong> for <strong className="text-white bg-[#0052FF]/20 px-1 rounded border border-[#0052FF]/30">{date}</strong>! 🎟️🔵<br/><br/>
+        Free mint, pay only gas. Lock yours in. <strong className="text-[#3B82FF]">$BASEPRE</strong>
       </p>
 
       {txHash && (

@@ -70,9 +70,14 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
       >
-        <motion.div variants={itemVariants} className="mb-4 inline-flex items-center gap-2 bg-[#0052FF]/10 border border-[#0052FF]/30 text-[#3B82FF] px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-[0_0_15px_rgba(0,82,255,0.2)]">
-          <span className="w-2 h-2 rounded-full bg-[#0052FF] animate-pulse"></span>
-          ERC-1155 on Base
+        <motion.div variants={itemVariants} className="mb-4 inline-flex items-center gap-2 flex-wrap">
+          <span className="inline-flex items-center gap-2 bg-[#00FF88]/10 border border-[#00FF88]/40 text-[#00FF88] px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-[0_0_15px_rgba(0,255,136,0.2)]">
+            <span className="w-2 h-2 rounded-full bg-[#00FF88] animate-pulse"></span>
+            Free Mint
+          </span>
+          <span className="inline-flex items-center gap-2 bg-[#0052FF]/10 border border-[#0052FF]/30 text-[#3B82FF] px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-[0_0_15px_rgba(0,82,255,0.2)]">
+            ERC-1155 on Base
+          </span>
         </motion.div>
 
         <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
@@ -82,7 +87,7 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p variants={itemVariants} className="text-xl md:text-2xl text-gray-400 mb-12 max-w-2xl font-light">
-          Mint your prediction. Hold the winning date.{' '}
+          <span className="text-[#00FF88] font-semibold">Free mint</span> your prediction — pay only gas. Hold the winning date.{' '}
           {isBasepreLive() ? (
             <>
               Earn 70% in <span className="text-[#3B82FF] font-semibold">${BASEPRE_SYMBOL}</span>.
