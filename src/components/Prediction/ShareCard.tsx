@@ -12,15 +12,19 @@ interface ShareCardProps {
   tokenId?: bigint;
 }
 
+// Prefer the deployed site URL over window.location.origin so dev/preview
+// shares never leak `localhost:3000` or a *.vercel.app subdomain.
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://basepre.xyz';
+
 export default function ShareCard({ date, xHandle, txHash, tokenId }: ShareCardProps) {
   const [copied, setCopied] = useState(false);
 
-  const tweetText = `I just minted my Base Launch Ticket NFT for ${date}! 🎟️🔵\n\nLock yours in before the date sells out. #BaseToken #WhenBase @base`;
-  const url = typeof window !== 'undefined' ? window.location.origin : '';
-  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(url)}`;
-  
+  const tweetText = `I just minted my Base Launch Ticket NFT for ${date}! 🎟️🔵\n\nLock yours in before the date sells out. $BASEPRE`;
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(SITE_URL)}`;
+
   // Warpcast uses a different intent format
-  const castText = `${tweetText} ${url}`;
+  const castText = `${tweetText} ${SITE_URL}`;
   const warpcastUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(castText)}`;
 
   const handleCopy = () => {
@@ -64,7 +68,7 @@ export default function ShareCard({ date, xHandle, txHash, tokenId }: ShareCardP
 
       <p className="text-left text-gray-300 text-sm mb-4 leading-relaxed">
         I just minted my <strong className="text-[#0052FF]">Base Launch Ticket NFT</strong> for <strong className="text-white bg-[#0052FF]/20 px-1 rounded border border-[#0052FF]/30">{date}</strong>! 🎟️🔵<br/><br/>
-        Lock yours in before the date sells out. #BaseToken #WhenBase @base
+        Lock yours in before the date sells out. <strong className="text-[#3B82FF]">$BASEPRE</strong>
       </p>
 
       {txHash && (
