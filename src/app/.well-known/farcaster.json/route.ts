@@ -13,13 +13,13 @@ export function GET() {
       homeUrl: SITE_URL,
       splashImageUrl: `${SITE_URL}/icon.png`,
       splashBackgroundColor: '#0052FF',
-      subtitle: 'Free mint • When Base Token?',
+      subtitle: 'Free mint, predict Base TGE',
       description:
-        'Free mint — predict the Base token TGE date. ERC-1155 on Base. Max 10 per date. Pay only gas (~$0.01).',
+        'Free mint, predict the Base token TGE date. ERC-1155 on Base. Max 10 per date. Pay only gas, about one cent.',
       primaryCategory: 'finance',
       tags: ['base', 'prediction', 'nft', 'tge', 'free-mint'],
       heroImageUrl: `${SITE_URL}/og-image.png`,
-      ogTitle: 'When Base Token? — Free Mint',
+      ogTitle: 'When Base Token, Free Mint',
       ogDescription:
         'Free mint your prediction for the Base token TGE date. Pay only gas.',
       ogImageUrl: `${SITE_URL}/og-image.png`,
