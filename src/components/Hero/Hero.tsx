@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 import RewardPool from './RewardPool';
 import { useBatchDateCounts } from '@/hooks/useContractData';
 import { DATE_RANGE_START, DATE_RANGE_END, formatDate } from '@/lib/utils';
+import { isBasepreLive, BASEPRE_SYMBOL } from '@/lib/token';
 
 export default function Hero() {
   // Generate all valid dates for stats aggregation
@@ -81,7 +82,14 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p variants={itemVariants} className="text-xl md:text-2xl text-gray-400 mb-12 max-w-2xl font-light">
-          Mint your prediction. Hold the winning date. Earn 70% of token fees.
+          Mint your prediction. Hold the winning date.{' '}
+          {isBasepreLive() ? (
+            <>
+              Earn 70% in <span className="text-[#3B82FF] font-semibold">${BASEPRE_SYMBOL}</span>.
+            </>
+          ) : (
+            <>Earn 70% of token fees.</>
+          )}
         </motion.p>
 
         <motion.div variants={itemVariants} className="mb-16">
