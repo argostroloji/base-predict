@@ -48,11 +48,13 @@ export default function Home() {
         {hasMinted && <MyPrediction />}
 
         <div className="flex flex-col xl:flex-row relative z-10 max-w-[1800px] mx-auto px-4 xl:px-8 items-center xl:items-start min-h-[90vh] pt-8 xl:pt-20 gap-12 xl:gap-8">
-            <div className="w-full xl:w-[400px] 2xl:w-[500px] flex-shrink-0 flex flex-col justify-center xl:sticky xl:top-24">
+            {/* On mobile: calendar first (order-1), hero second (order-2).
+                On xl+: hero is left column, calendar is right — order-none restores flow. */}
+            <div className="w-full xl:w-[400px] 2xl:w-[500px] flex-shrink-0 flex flex-col justify-center xl:sticky xl:top-24 order-2 xl:order-none">
             <Hero />
             </div>
-            
-            <div className="w-full flex-grow overflow-hidden xl:pb-24 flex flex-col">
+
+            <div className="w-full flex-grow overflow-hidden xl:pb-24 flex flex-col order-1 xl:order-none">
             <CalendarHeatmap
                 selectedDate={selectedDate}
                 onSelectDate={handleSelectDate}
