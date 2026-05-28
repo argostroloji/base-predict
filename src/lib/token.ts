@@ -36,3 +36,10 @@ export function getAerodromeSwapUrl(token: string = BASEPRE_ADDRESS): string {
 export function getBaseScanTokenUrl(token: string = BASEPRE_ADDRESS): string {
   return `https://basescan.org/token/${token}`;
 }
+
+/**
+ * Bankr launch / buy page — alternative on-chain DEX UX.
+ */
+export function getBankrUrl(token: string = BASEPRE_ADDRESS): string {
+  return `https://bankr.bot/launches/${token}`;
+}
