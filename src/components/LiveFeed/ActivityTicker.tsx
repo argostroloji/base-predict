@@ -156,7 +156,7 @@ export default function ActivityTicker() {
 
   if (activities.length === 0) {
     return (
-      <div className="w-full bg-white/[0.02] border-y border-white/5 py-2 overflow-hidden mt-16 z-40 relative">
+      <div className="w-full bg-white/[0.02] border-y border-white/5 py-2 overflow-hidden z-40 relative">
         <div className="flex items-center justify-center text-sm text-gray-500 py-1">
           <span className="w-1.5 h-1.5 rounded-full bg-[#00FF88] mr-3 animate-pulse" />
           Loading on-chain activity…

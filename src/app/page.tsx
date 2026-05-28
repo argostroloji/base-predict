@@ -36,8 +36,13 @@ export default function Home() {
 
       <div>
         <Navbar />
-        <TokenBar />
-        <ActivityTicker />
+        {/* Fixed navbar is h-16 (64px); push in-flow content down so it
+            doesn't disappear underneath. TokenBar + ActivityTicker etc.
+            no longer manage their own top offset. */}
+        <div className="pt-16">
+          <TokenBar />
+          <ActivityTicker />
+        </div>
 
         {hasMinted && <MyPrediction />}
 
