@@ -10,12 +10,15 @@ import { base } from 'wagmi/chains';
 import { http, fallback } from 'wagmi';
 import { farcasterMiniApp } from '@farcaster/miniapp-wagmi-connector';
 
-// Multiple public RPCs with fallback — public node is more permissive on
-// multicall + log range than the default mainnet.base.org gateway.
+// CORS-friendly Base RPCs only. llamarpc.com blocks browser requests via
+// CORS preflight, which silently breaks getLogs/getContractEvents from
+// the frontend. publicnode + 1rpc + official gateway all allow browser
+// origins.
 const baseTransport = fallback([
-  http('https://base.llamarpc.com'),
-  http('https://base.publicnode.com'),
+  http('https://base-rpc.publicnode.com'),
+  http('https://1rpc.io/base'),
   http('https://mainnet.base.org'),
+  http('https://base.publicnode.com'),
 ]);
 
 // Wrap the Farcaster Mini App wagmi connector as a RainbowKit wallet
