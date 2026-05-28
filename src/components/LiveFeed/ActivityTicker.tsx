@@ -69,24 +69,34 @@ export default function ActivityTicker() {
       let logs: Awaited<ReturnType<typeof fetchRange>> = [];
       let strategyUsed = '';
 
-      // ── Strategy 1: last 500k blocks (~11 days on Base) ─────────────
+      // ── Strategy 1: last 49k blocks (~27h on Base) ──────────────────
+      // publicnode caps getLogs at 50 000 blocks; staying under that
+      // keeps the call quiet in the console for the common recent case.
       try {
         const latest = await publicClient.getBlockNumber();
-        console.log('[ActivityTicker] latest block:', latest.toString());
-        const from = latest > 500_000n ? latest - 500_000n : 0n;
-        // Most RPCs accept 500k blocks for address+topic filtered getLogs
+        const from = latest > 49_000n ? latest - 49_000n : 0n;
         logs = await fetchRange(from);
-        strategyUsed = `500k-range from ${from}`;
-        console.log('[ActivityTicker] strategy 1 ok:', logs.length, 'events');
-      } catch (e) {
-        console.warn('[ActivityTicker] 500k-range failed:', e);
+        strategyUsed = `49k-range from ${from}`;
+      } catch {
+        // fall through silently
       }
 
-      // ── Strategy 2: chunked 9000-block scan over last 1M blocks ──────
+      // ── Strategy 2: full-chain (fromBlock: 0n) ───────────────────────
+      // Address+topic filter usually allowed on any range.
+      if (logs.length === 0) {
+        try {
+          logs = await fetchRange(0n);
+          strategyUsed = 'fromBlock:0';
+        } catch {
+          // fall through
+        }
+      }
+
+      // ── Strategy 3: chunked 49k-block scan over last 1M blocks ───────
       if (logs.length === 0) {
         try {
           const latest = await publicClient.getBlockNumber();
-          const CHUNK = 9000n;
+          const CHUNK = 49_000n;
           const DEPTH = 1_000_000n;
           const start = latest > DEPTH ? latest - DEPTH : 0n;
           const acc: typeof logs = [];
@@ -100,24 +110,10 @@ export default function ActivityTicker() {
           }
           logs = acc;
           strategyUsed = `chunked 1M from ${start}`;
-          console.log('[ActivityTicker] strategy 2 ok:', logs.length, 'events');
-        } catch (e) {
-          console.warn('[ActivityTicker] chunked scan failed:', e);
+        } catch {
+          // last resort failed — leave logs empty
         }
       }
-
-      // ── Strategy 3: full-chain (fromBlock: 0n) ───────────────────────
-      if (logs.length === 0) {
-        try {
-          logs = await fetchRange(0n);
-          strategyUsed = 'fromBlock:0';
-          console.log('[ActivityTicker] strategy 3 ok:', logs.length, 'events');
-        } catch (e) {
-          console.warn('[ActivityTicker] fromBlock:0 failed:', e);
-        }
-      }
-
-      console.log(`[ActivityTicker] final: ${logs.length} events via ${strategyUsed || 'NONE'}`);
 
       // Process
       const seen = new Set<string>();
