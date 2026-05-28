@@ -21,16 +21,30 @@ export default function ActivityTicker() {
     if (!publicClient) return;
     (async () => {
       try {
-        const latestBlock = await publicClient.getBlockNumber();
-        // Most public Base RPCs cap getLogs around 9999 blocks
-        const fromBlock = latestBlock > 9000n ? latestBlock - 9000n : 0n;
-        const logs = await publicClient.getContractEvents({
-          address: CONTRACT_ADDRESS,
-          abi: BASE_LAUNCH_NFT_ABI,
-          eventName: 'PredictionMinted',
-          fromBlock,
-          toBlock: 'latest',
-        });
+        // Try full-chain scan first; RPCs allow fromBlock:0 for narrow
+        // address+topic queries regardless of chain length.
+        let logs = await (async () => {
+          try {
+            return await publicClient.getContractEvents({
+              address: CONTRACT_ADDRESS,
+              abi: BASE_LAUNCH_NFT_ABI,
+              eventName: 'PredictionMinted',
+              fromBlock: 0n,
+              toBlock: 'latest',
+            });
+          } catch {
+            // Fallback: last ~24 h of blocks
+            const latest = await publicClient.getBlockNumber();
+            const fromBlock = latest > 43_200n ? latest - 43_200n : 0n;
+            return publicClient.getContractEvents({
+              address: CONTRACT_ADDRESS,
+              abi: BASE_LAUNCH_NFT_ABI,
+              eventName: 'PredictionMinted',
+              fromBlock,
+              toBlock: 'latest',
+            });
+          }
+        })();
 
         const recent: Activity[] = logs
           .slice(-20)

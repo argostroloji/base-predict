@@ -124,30 +124,58 @@ export default function CalendarHeatmap({ selectedDate, onSelectDate }: Calendar
         const lastBlock = BigInt(localStorage.getItem(LS_BLOCK) ?? '0');
 
         // First load: scan deep back. Subsequent loads: only new blocks.
-        const scanFrom  = lastBlock > 0n
-          ? lastBlock + 1n
-          : (latest > INITIAL_DEPTH ? latest - INITIAL_DEPTH : 0n);
-
         const newMap = new Map(cached);
         let changed  = false;
 
-        for (let from = scanFrom; from <= latest; from += CHUNK_SIZE) {
-          const to = from + CHUNK_SIZE - 1n < latest ? from + CHUNK_SIZE - 1n : latest;
-          try {
-            const logs = await publicClient.getContractEvents({
-              address: CONTRACT_ADDRESS,
-              abi: BASE_LAUNCH_NFT_ABI,
-              eventName: 'PredictionMinted',
-              fromBlock: from,
-              toBlock: to,
-            });
-            for (const log of logs) {
-              const { tokenId, xHandle } = (log as any).args;
-              mergeLog(newMap, tokenId as bigint, xHandle as string);
-              changed = true;
+        // ── Strategy 1: single full-chain call ────────────────────────────
+        // Public RPCs usually allow fromBlock:0 when the query is narrowed
+        // by contract address + event topic (result set is tiny).
+        let allLogs: Awaited<ReturnType<typeof publicClient.getContractEvents>> = [];
+        let fullScanOk = false;
+        try {
+          allLogs = await publicClient.getContractEvents({
+            address: CONTRACT_ADDRESS,
+            abi: BASE_LAUNCH_NFT_ABI,
+            eventName: 'PredictionMinted',
+            fromBlock: 0n,
+            toBlock: 'latest',
+          });
+          fullScanOk = true;
+        } catch {
+          // RPC rejected the wide range — fall back to chunks below
+        }
+
+        if (fullScanOk) {
+          for (const log of allLogs) {
+            const { tokenId, xHandle } = (log as any).args;
+            mergeLog(newMap, tokenId as bigint, xHandle as string);
+            changed = true;
+          }
+        } else {
+          // ── Strategy 2: incremental chunks ─────────────────────────────
+          // Start from cache checkpoint or go back INITIAL_DEPTH blocks.
+          const scanFrom = lastBlock > 0n
+            ? lastBlock + 1n
+            : (latest > INITIAL_DEPTH ? latest - INITIAL_DEPTH : 0n);
+
+          for (let from = scanFrom; from <= latest; from += CHUNK_SIZE) {
+            const to = from + CHUNK_SIZE - 1n < latest ? from + CHUNK_SIZE - 1n : latest;
+            try {
+              const logs = await publicClient.getContractEvents({
+                address: CONTRACT_ADDRESS,
+                abi: BASE_LAUNCH_NFT_ABI,
+                eventName: 'PredictionMinted',
+                fromBlock: from,
+                toBlock: to,
+              });
+              for (const log of logs) {
+                const { tokenId, xHandle } = (log as any).args;
+                mergeLog(newMap, tokenId as bigint, xHandle as string);
+                changed = true;
+              }
+            } catch {
+              // Chunk rejected — skip and continue
             }
-          } catch {
-            // RPC chunk limit hit — skip and continue
           }
         }
 
