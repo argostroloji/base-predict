@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Strict React checks in dev to surface bugs early
+  // Strict React checks in dev to surface bugs early — build cache bust: 2026-05-28
   reactStrictMode: true,
 
   // Remove the "X-Powered-By: Next.js" header

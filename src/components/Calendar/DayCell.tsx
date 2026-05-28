@@ -34,13 +34,14 @@ export default function DayCell({
 
   return (
     <div className="relative w-12 h-12 flex items-center justify-center">
-      {/* Main circle */}
+      {/* Main circle — borderRadius forced via style so Tailwind JIT can't drop it */}
       <div
         onClick={isDisabled ? undefined : () => onClick(date)}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={onLeave}
+        style={{ borderRadius: '50%', width: 44, height: 44, flexShrink: 0 }}
         className={[
-          'w-11 h-11 rounded-full flex flex-col items-center justify-center',
+          'flex flex-col items-center justify-center',
           'transition-all duration-200 select-none',
           isDisabled
             ? 'opacity-20 cursor-not-allowed bg-white/[0.04]'
