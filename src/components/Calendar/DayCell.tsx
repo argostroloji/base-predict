@@ -79,6 +79,13 @@ export default function DayCell({
         )}
       </div>
       
+      {/* Always-visible 🔥 badge for hot dates (6–9 minted) */}
+      {!isDisabled && count >= 6 && count < 10 && (
+        <div className="absolute -top-1.5 -right-1.5 text-[11px] z-30 select-none pointer-events-none leading-none">
+          🔥
+        </div>
+      )}
+
       {/* FOMO Indicator / Urgency Label on hover */}
       {!isDisabled && urgencyInfo.type === 'urgent' && (
         <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-amber-500/90 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50 animate-float-up">

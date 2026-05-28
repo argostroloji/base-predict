@@ -8,6 +8,7 @@ import Hero from '@/components/Hero/Hero';
 import CalendarHeatmap from '@/components/Calendar/CalendarHeatmap';
 import PredictionModal from '@/components/Prediction/PredictionModal';
 import MyPrediction from '@/components/Prediction/MyPrediction';
+import TopDates from '@/components/Leaderboard/TopDates';
 import MiniAppReady from '@/components/MiniAppReady';
 import { useAccount } from 'wagmi';
 import { useMintedDate } from '@/hooks/useContractData';
@@ -51,11 +52,12 @@ export default function Home() {
             <Hero />
             </div>
             
-            <div className="w-full flex-grow overflow-hidden xl:pb-24">
-            <CalendarHeatmap 
-                selectedDate={selectedDate} 
-                onSelectDate={handleSelectDate} 
+            <div className="w-full flex-grow overflow-hidden xl:pb-24 flex flex-col">
+            <CalendarHeatmap
+                selectedDate={selectedDate}
+                onSelectDate={handleSelectDate}
             />
+            <TopDates />
             </div>
         </div>
 

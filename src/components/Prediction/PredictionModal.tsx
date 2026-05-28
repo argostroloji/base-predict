@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
 import ShareCard from './ShareCard';
 import TicketReveal from './TicketReveal';
+import Confetti from '@/components/Confetti';
 import { formatDate, MAX_MINTS_PER_DATE } from '@/lib/utils';
 import { useNFTMint } from '@/hooks/useNFTMint';
 import { useDateMintCount, useMintedDate } from '@/hooks/useContractData';
@@ -242,6 +243,8 @@ export default function PredictionModal({ isOpen, onClose, selectedDate, onSucce
                   </div>
                 </motion.div>
               )}
+
+              {step === 'success' && <Confetti />}
 
               {step === 'success' && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center">
