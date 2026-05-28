@@ -30,33 +30,21 @@ export function formatDateKey(date: Date): string {
 }
 
 /**
- * NFT-aware heatmap color system based on 0–10 mint scarcity scale.
+ * Apple-inspired heatmap fill system — no borders, solid translucent fills.
  *
- * 0/10:        Empty — subtle dark cell
- * 1–5/10:      Calm — clean blue glow (progressively brighter)
- * 6–9/10:      Urgent — pulsing amber/orange FOMO state
- * 10/10:       Sold Out — dark locked state
+ * 0/10:   Empty  — very subtle surface
+ * 1–3:    Low    — soft blue tint
+ * 4–6:    Mid    — medium blue
+ * 7–9:    Hot    — warm amber
+ * 10/10:  Sold   — dark locked surface
  */
 export function getHeatmapColor(count: number): string {
-  if (count === 0) {
-    return 'bg-white/[0.03] border border-white/10 hover:bg-white/[0.08] text-white/50';
-  }
-  if (count <= 3) {
-    return 'bg-[#0052FF]/20 border border-[#0052FF]/30 text-white';
-  }
-  if (count <= 5) {
-    return 'bg-[#0052FF]/40 border border-[#0052FF]/60 text-white shadow-[0_0_8px_rgba(0,82,255,0.25)]';
-  }
-  if (count <= 7) {
-    // Urgency begins — amber glow
-    return 'bg-amber-500/20 border-2 border-amber-500/60 text-white shadow-[0_0_12px_rgba(245,158,11,0.4)] animate-pulse-amber';
-  }
-  if (count <= 9) {
-    // High urgency — intense orange
-    return 'bg-orange-500/25 border-2 border-orange-400/80 text-white shadow-[0_0_18px_rgba(249,115,22,0.5)] animate-pulse-amber';
-  }
+  if (count === 0)  return 'bg-white/[0.06] text-white/50';
+  if (count <= 3)   return 'bg-[#0052FF]/25 text-white';
+  if (count <= 6)   return 'bg-[#0052FF]/55 text-white';
+  if (count <= 9)   return 'bg-amber-500/50 text-white';
   // 10/10 — Sold out
-  return 'bg-white/[0.02] border border-white/5 text-white/20 cursor-not-allowed';
+  return 'bg-white/[0.04] text-white/20 cursor-not-allowed';
 }
 
 /**
