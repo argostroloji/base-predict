@@ -59,13 +59,13 @@ export default function Home() {
             </div>
         </div>
 
-        <PredictionModal 
+        <PredictionModal
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
             selectedDate={selectedDate}
             onSuccess={handleSuccess}
         />
-        
+
         {/* Footer */}
         <footer className="py-8 border-t border-white/5 text-gray-500 text-sm mt-12 relative z-10">
             <div className="max-w-[1800px] mx-auto px-4 xl:px-8 flex flex-col items-center gap-4">
