@@ -39,7 +39,7 @@ export default function RewardPool() {
             transition={{ delay: 0.8, duration: 0.5 }}
             className="mt-1 text-sm text-gray-400 font-medium"
           >
-            of $BASEPREDICT token fees<br/>
+            of $BASEPRE token fees<br/>
             distributed to correct-date NFT holders
           </motion.div>
         </div>
