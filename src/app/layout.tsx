@@ -11,7 +11,7 @@ const OG_IMAGE = `${SITE_URL}/og-image.png`;
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: 'Base Predict — Free Mint, When Base Token?',
-  description: 'Free mint — predict the Base token TGE date. ERC-1155 on Base. Max 10 NFTs per date. Pay only gas. Winners earn 70% in $BASEPRE.',
+  description: 'Free mint — predict the Base token TGE date. ERC-1155 on Base. Max 10 NFTs per date. Pay only gas. Winners earn 50% in $BASEPRE.',
   openGraph: {
     title: 'When Base Token? — Free Mint on Base',
     description: 'Free mint your prediction for the Base token TGE date. Pay only gas (~$0.01). ERC-1155 on Base.',

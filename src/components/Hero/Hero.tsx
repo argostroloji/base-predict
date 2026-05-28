@@ -125,9 +125,9 @@ export default function Hero() {
         <motion.p variants={itemVariants} className="text-xl md:text-2xl text-gray-400 mb-12 max-w-2xl font-light">
           <span className="text-[#00FF88] font-semibold">Free mint</span> your prediction — pay only gas. Hold the winning date.{' '}
           {isBasepreLive() ? (
-            <>Earn 70% in <span className="text-[#3B82FF] font-semibold">${BASEPRE_SYMBOL}</span>.</>
+            <>Earn 50% in <span className="text-[#3B82FF] font-semibold">${BASEPRE_SYMBOL}</span>.</>
           ) : (
-            <>Earn 70% of token fees.</>
+            <>Earn 50% of token fees.</>
           )}
         </motion.p>
 

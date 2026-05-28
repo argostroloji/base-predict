@@ -31,7 +31,7 @@ export default function RewardPool() {
             transition={{ delay: 0.3, duration: 0.5 }}
             className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-white to-[#0052FF] drop-shadow-[0_0_15px_rgba(0,82,255,0.5)]"
           >
-            70%
+            50%
           </motion.div>
           <motion.div
             initial={{ opacity: 0 }}
