@@ -4,7 +4,6 @@ import { useState } from 'react';
 import {
   isBasepreLive,
   getAerodromeSwapUrl,
-  getBaseScanTokenUrl,
   getBankrUrl,
   BASEPRE_ADDRESS,
   BASEPRE_SYMBOL,
@@ -81,15 +80,6 @@ export default function TokenBar() {
             className="inline-flex items-center gap-1 text-[11px] font-bold text-black bg-[#00FF88] hover:bg-[#33ffa3] rounded px-2.5 py-1 shadow-[0_0_10px_rgba(0,255,136,0.3)] transition"
           >
             Buy on Bankr <span className="opacity-70">↗</span>
-          </a>
-
-          <a
-            href={getBaseScanTokenUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-[11px] font-semibold text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 rounded px-2.5 py-1 transition"
-          >
-            BaseScan <span className="opacity-70">↗</span>
           </a>
         </div>
       </div>
